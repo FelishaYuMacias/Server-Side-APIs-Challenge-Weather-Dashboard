@@ -1,8 +1,18 @@
+:root {
+
+}
 body {
     background-color: cyan;
 }
-header {
+header, h1 {
     background-color: darkblue;
     color: whitesmoke;
+    
+}
+
+.row{
+    background-color: hotpink;
+    margin: 0;
+    padding: 0;
     
 }

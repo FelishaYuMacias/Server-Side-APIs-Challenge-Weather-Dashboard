@@ -7,6 +7,8 @@
     <title>Weather Dashboard</title>
     <!-- link bootstrap  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!-- link jquery style sheet  -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
  <!-- link my style sheet  -->
     <link rel ="stylesheet" href="./assets/css/style.css"/>
 </head>
@@ -15,16 +17,42 @@
         <h1 class="container col-3">Weather Dashboard</h1>
     </header>
     <main>
-        <section> 
+        <section class="container-fluid"> 
             <!-- details for today's weather for selected city  -->
-        </section>
-        <section>
             <!-- 5 day forcast for selected city  -->
+            <div class="row">
+                <div class="col-3">
+                  <h2>Search for a City:</h2> 
+                  <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
+                  <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+                </div>
+                <div class="col-9">
+                  Detailed Forcast for today for chosen city
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                 List of Past Cities
+                </div>
+                <div class="col-9">
+                  5 Day Forecast
+                </div>
+              </div>
+
         </section>
     </main>
-    <aside>
-        <!-- search for city  -->
-    </aside>
+    <!-- link jquery js  -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( ".widget input[type=submit], .widget a, .widget button" ).button();
+    $( "button, input, a" ).on( "click", function( event ) {
+      event.preventDefault();
+    } );
+  } );
+  </script>
+ <!-- link my js  -->
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
