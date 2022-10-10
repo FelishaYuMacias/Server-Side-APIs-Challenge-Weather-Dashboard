@@ -1,18 +1,36 @@
-:root {
-
-}
 body {
-    background-color: cyan;
+    background-color: whitesmoke;
 }
 header, h1 {
     background-color: darkblue;
     color: whitesmoke;
+    text-align: center;
+    padding: 5px;
     
+}
+label {
+    font-size: x-large;
+    font-weight: 700;
+    padding: 5px;
+}
+.card {
+    margin: 5px;
+}
+.currentCityName {
+    font-size: x-large;
+    font-weight: 800;
+}
+.cardDate {
+    font-size: large;
 }
 
 .row{
-    background-color: hotpink;
+    
     margin: 0;
     padding: 0;
-    
+
+}
+.images{
+    max-height: 100px;
+    max-width: 100px;
 }

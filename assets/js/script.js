@@ -1,60 +1,167 @@
 //create variable for API key for weather API
-var APIKey = "929102aeeecc47cdcf4b64fb757bbffc"
+var APIkey = "929102aeeecc47cdcf4b64fb757bbffc";
+var city = "Yakima"
 
-//create variables for lat and lon so we can search for those cities
-var lat;
-var lon;
+//Grabs the current date and time
+var date = moment().format('dddd, MMMM Do YYYY');
+var currentDateandTime = moment().format('YYYY-MM-DD HH:MM:SS')
 
-//global variables
-var city = $('#search-city')
-var pastCities = $('#past')
-var saveBtn =$('#saveBtn')
-var fiveDay =$('#fiveDay')
-var date = moment();
-$("#date").text(date.format("MMM Do, YYYY"));
+//array for previously searched cities
+var searchCity = [];
+//save the search and add to array
+$('.search').on("click", function (event) {
+	event.preventDefault();
+	city = $(this).parent('.searchBtnPar').siblings('.searchText').val().trim();
+	if (city === "") {
+		return;
+	};
+	searchCity.push(city);
 
-//create a Query URL to make the API call - 
-var fiveDayURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+	localStorage.setItem('city', JSON.stringify(searchCity));
+	fiveDayForcastEl.empty();
+    //call search history function
+	searchHistory();
+    //call current weather function
+	currentWeather();
+});
 
-var currentURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=" + APIKey;
+//Will create buttons based on search history 
+var searchCityEl = $('.searchCity');
+function searchHistory() {
+	searchCityEl.empty();
 
-//make the API call using fetch
+	for (let i = 0; i < searchCity.length; i++) {
 
-// when city is entered and button is pushed
-saveBtn.on("click", function click(event) {
-    event.preventDefault();
-    // city.val();
-    // getCurrent(event);
-    console.log("clicked");
-    });
-// console.log(result)
+		//variables for creating new rows/buttons for city search
+        var rowEl = $('<row>');
+		var btnEl = $('<button>').text(`${searchCity[i]}`)
+        //add styling/class to new rows/buttons
 
-//city info is saved in local storage
-    //a button is created and put in a list with city info attached
+		rowEl.addClass('row searchBtnRow');
+		btnEl.addClass('btn btn-outline-secondary searchBtn');
+		btnEl.attr('type', 'button');
 
-    // Function to get and display the current conditions on Open Weather Maps
-    var getCurrent = (event) => {
-        event.preventDefault()
-        // Obtain city name from the search box
-        city.val();
-        // Set the queryURL to fetch from API using weather search - added units=imperial to fix
-        fetch(currentURL)
-        .then((result) => {
-            return result.json();
-        })
-        // .then((result) => {
-            //     // Save city to local storage
-            //     function save () {
-                //       localStorage.setItem("city", city)  
-                //     }
-                //     save(city);
-    }
-    
-    // Render cities list
-    // renderCities();
-    // Obtain the 5day forecast for the searched city
-    // getFiveDayForecast(event);
-    
-    //when past city is clicked on, data for that city is displayed
-    
-    
+		searchCityEl.prepend(rowEl);
+		rowEl.append(btnEl);
+	} if (!city) {
+		return;
+	}
+	//Past search buttons return results
+	$('.searchBtn').on("click", function (event) {
+		event.preventDefault();
+		city = $(this).text();
+		fiveDayForcastEl.empty();
+		currentWeather();
+	});
+};
+
+var currentDay = $('.currentDay')
+//Applies the weather data to the current day card and then shows the five day forecast
+function currentWeather() {
+	var currentURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${APIkey}`;
+
+	$(currentDay).empty();
+
+	$.ajax({
+		url: currentURL,
+		method: 'GET',
+	}).then(function (response) {
+		$('.currentCityName').text(response.name);
+		$('.currentDate').text(date);
+		//put icon images on page
+		$('.images').attr('src', `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
+		// create p element for Temperature and append info on page
+		var tempEl = $('<p>').text(`Temperature: ${response.main.temp} °F`);
+		currentDay.append(tempEl);
+		//Humidity
+		var pElHumid = $('<p>').text(`Humidity: ${response.main.humidity} %`);
+		currentDay.append(pElHumid);
+		//Wind Speed
+		var pElWind = $('<p>').text(`Wind Speed: ${response.wind.speed} MPH`);
+		currentDay.append(pElWind);
+		//Set the lat and long from the searched city
+		var lon = response.coord.lon;
+		console.log(lon);
+		var lat = response.coord.lat;
+		console.log(lat);
+
+	});
+	getFiveDayForecast();
+};
+
+var fiveDayForcastEl = $('.fiveDayForecast');
+
+function getFiveDayForecast() {
+	var fiveDayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${APIkey}`;
+
+	$.ajax({
+		url: fiveDayURL,
+		method: 'GET',
+	}).then(function (response) {
+		var fiveDayArray = response.list;
+		var userWeather = [];
+		//Made a object that would allow for easier data read
+		$.each(fiveDayArray, function (index, value) {
+			testObj = {
+				date: value.dt_txt.split(' ')[0],
+				time: value.dt_txt.split(' ')[1],
+				temp: value.main.temp,
+				icon: value.weather[0].icon,
+				humidity: value.main.humidity,
+                wind_speed: value.wind.speed
+			}
+
+			if (value.dt_txt.split(' ')[1] === "12:00:00") {
+				userWeather.push(testObj);
+			}
+		})
+		//Inject the cards to the screen 
+		for (let i = 0; i < userWeather.length; i++) {
+
+			var divElCard = $('<div>');
+			divElCard.attr('class', 'card text-white bg-primary mb-3 cardOne');
+			divElCard.attr('style', 'max-width: 200px;');
+			fiveDayForcastEl.append(divElCard);
+
+			var divElHeader = $('<div>');
+			divElHeader.attr('class', 'card-header')
+			var m = moment(`${userWeather[i].date}`).format('MM-DD-YYYY');
+			divElHeader.text(m);
+			divElCard.append(divElHeader)
+
+			var divElBody = $('<div>');
+			divElBody.attr('class', 'card-body');
+			divElCard.append(divElBody);
+
+			var divElIcon = $('<img>');
+			divElIcon.attr('class', 'icons');
+			divElIcon.attr('src', `https://openweathermap.org/img/wn/${userWeather[i].icon}@2x.png`);
+			divElBody.append(divElIcon);
+
+			//Temp
+			var pElTemp = $('<p>').text(`Temperature: ${userWeather[i].temp} °F`);
+			divElBody.append(pElTemp);
+			//Humidity
+			var pElHumid = $('<p>').text(`Humidity: ${userWeather[i].humidity} %`);
+			divElBody.append(pElHumid);
+            //Wind Speed
+			var pElWind = $('<p>').text(`Wind Speed: ${userWeather[i].wind_speed} MPH`);
+			divElBody.append(pElWind);
+
+		}
+	});
+};
+
+//Start page with information from Yakima
+function firstLoad() {
+
+	var searchCityStore = JSON.parse(localStorage.getItem('city'));
+
+	if (searchCityStore !== null) {
+		searchCity = searchCityStore
+	}
+	searchHistory();
+	currentWeather();
+};
+// Call first load function
+firstLoad();

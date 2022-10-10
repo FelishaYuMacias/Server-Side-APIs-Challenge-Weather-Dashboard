@@ -13,35 +13,43 @@
     <link rel ="stylesheet" href="./assets/css/style.css"/>
 </head>
 <body>
-    <header class="container col-12">
-        <h1 class="container col-3">Weather Dashboard</h1>
+  <body>
+    <header>
+      <h1>Weather Dashboard</h1>
+      <h3 class="currentDate"></h3>
     </header>
-    <main>
-        <section class="container-fluid"> 
-            <!-- details for today's weather for selected city  -->
-            <!-- 5 day forcast for selected city  -->
-            <div class="row">
-                <div class="col-3">
-                  <h2>Search for a City:</h2> 
-                  <input id= searchText class="form-control form-control-lg" type="text" placeholder="City Name">
-                  <button id= searchBtn type="button" class="btn btn-primary btn-lg btn-block">Search</button>
-                </div>
-                <div id = current class="col-9">
-                  <!-- Detailed Forcast for today for chosen city -->
-                  <p id = date></p>
-                </div>
+      <div class="container-fluid mainCon">
+        <div class="row">
+          <div class="col-12 col-md-3 col-xl-3 colOne">
+            <label>Search for a City:</label>
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control searchText" placeholder="Yakima...">
+              <div class="input-group-append searchBtnPar">
+                <button class="btn btn-primary search" type="button">Search</button>
               </div>
-              <div class="row">
-                <div id= past class="col-3">
-                 List of Past Cities
-                </div>
-                <div id=fiveDay class="col-9">
-                  5 Day Forecast
+            </div>
+
+            <div class="container searchCity"></div>
+
+          </div>
+          <div class="col-12 col-md-9 col-xl-9 colTwo">
+
+            <div class="col-12 today">
+
+              <div class="card bg-light mb-3 " style="max-width: 400px;">
+                <h2 class="card-header currentCityName"></h2>
+                <h3 class="card-header currentDate cardDate"></h3>
+                <img class="images"/>
+                <div class="card-body currentDay">
                 </div>
               </div>
 
-        </section>
-    </main>
+            </div>
+
+            <div class="row fiveDayForecast"></div>
+
+          </div>
     <!-- link jquery js  -->
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -55,9 +63,9 @@
   </script>
   <!-- link moment js  -->
   <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
-    ></script>
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+></script>
  <!-- link my js  -->
     <script src="./assets/js/script.js"></script>
 </body>
