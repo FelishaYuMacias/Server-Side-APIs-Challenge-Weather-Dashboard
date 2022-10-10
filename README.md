@@ -25,11 +25,14 @@ THEN I am again presented with current and future conditions for that city
 
 ## Usage
 
-<!-- Provide instructions and examples for use. Include screenshots as needed.
+Type the name of a city you would like to get weather information on in the search area. Click "Search"
+The weather information for today and for the next 5 days should populate on the screen and a button linking to that city should appear beneath the search area.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
+If you wish to revist cities searched in the past, simply click that city's button.
 
-![alt text](assets/images/screenshot.png) -->
+## Screenshot
+
+![Screenshot](Screenshot.png)
 
 ## Credits
 
@@ -44,10 +47,40 @@ https://openweathermap.org/forecast5
 Moment JS
 https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js
 
-<!-- List your collaborators, if any, with links to their GitHub profiles.
+jQuery
+https://jqueryui.com/demos/
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+Bootstrap
+https://getbootstrap.com/docs/4.5/getting-started/introduction/
 
-If you followed tutorials, include links to those here as well. -->
+## Webpage Links
+
+Link to deployed site
+https://felishayumacias.github.io/Server-Side-APIs-Challenge-Weather-Dashboard/
+
+Link to Repo
+https://github.com/FelishaYuMacias/Server-Side-APIs-Challenge-Weather-Dashboard
 
 ## License
+
+MIT License
+
+Copyright (c) 2022 Felisha
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
