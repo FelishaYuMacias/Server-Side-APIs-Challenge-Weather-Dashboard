@@ -23,18 +23,19 @@
             <div class="row">
                 <div class="col-3">
                   <h2>Search for a City:</h2> 
-                  <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
-                  <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+                  <input id= searchText class="form-control form-control-lg" type="text" placeholder="City Name">
+                  <button id= searchBtn type="button" class="btn btn-primary btn-lg btn-block">Search</button>
                 </div>
-                <div class="col-9">
-                  Detailed Forcast for today for chosen city
+                <div id = current class="col-9">
+                  <!-- Detailed Forcast for today for chosen city -->
+                  <p id = date></p>
                 </div>
               </div>
               <div class="row">
-                <div class="col-3">
+                <div id= past class="col-3">
                  List of Past Cities
                 </div>
-                <div class="col-9">
+                <div id=fiveDay class="col-9">
                   5 Day Forecast
                 </div>
               </div>
@@ -52,6 +53,11 @@
     } );
   } );
   </script>
+  <!-- link moment js  -->
+  <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>
  <!-- link my js  -->
     <script src="./assets/js/script.js"></script>
 </body>
